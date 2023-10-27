@@ -1,0 +1,29 @@
+Split 100k into 3 subsets: 0-10k (30k-40k exactly the same); 10k-30k; 40k-100k
+
+0-10k:
+	- No duplicates for both Viet-Lao
+	- Either one duplicate (TODO).
+	- Have emojis
+10k-30k: 
+	- 274 duplicates for both VietLao. 
+	- Either one duplicate (TODO)
+	- Have emojis (TODO)
+
+40k-100k: 
+	- 927 duplicates for both VietLao.
+	- Either one duplicate (TODO)
+	- Have emojis (TODO)
+
+Character Level Length Ratio (vi:lo): Normal distribution, centre at 1, take interval (0.5; 1.5)
+
+Post process URL, emojis, symbols
+
+Lines:
+	- 45007: Strange
+	- 50175:
+	- 59072:
+	- 59073:
+
+Emojis notes:
+	- Line 11831 :(
+	
