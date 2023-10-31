@@ -3,3 +3,4 @@ baseline/211023_NhatTan_Test/datasets
 baseline/211023_NhatTan_Test/.idea
 baseline/211023_NhatTan_Test/__pycache__
 datasets/original/Monolingual
+model/mt5_translation.pt
