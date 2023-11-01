@@ -1,0 +1,14 @@
+numpy
+seaborn
+pandas
+matplotlib
+emoji
+beautifulsoup4
+
+# torch
+datasets
+transformers
+# sentencepiece
+evaluate
+sacrebleu
+protobuf==3.20.*
