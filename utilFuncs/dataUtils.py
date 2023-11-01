@@ -1,12 +1,4 @@
-import os
-from copy import deepcopy
-import pandas as pd
-import numpy as np
-from bs4 import BeautifulSoup
-import string
-import operator
-
-from constants import *
+from utilFuncs.constants import *
 
 
 def generateSplitInd(datasetSize, p1, p2, p3, NP_SEED = NP_SEED):
@@ -45,11 +37,33 @@ def splitDataset(allLine1, allLine2, p1, p2, p3):
     )
 
 
+def findFiles(files, relative_path, verbose = True):
+    pathsToFiles = []
+    for file in files:
+        pathsToFiles += glob.glob("%s/%s" % (relative_path, file), recursive = True)
+
+    if (verbose):
+        print('Found %d paths' % (len(pathsToFiles)))
+
+    return pathsToFiles
+
 def readData(path):
+    # pathLst = glob.glob(path)
+
     with open(path, 'r', encoding = 'utf8') as file:
         allLine = file.readlines()
     return allLine
 
+
+def readAllData(paths, verbose = True):
+    allData = []
+    for path in paths:
+        allData.append(readData(path))
+
+    if (verbose):
+        print('Read %d files' % (len(allData)))
+
+    return allData
 
 def writeData(allLine, fileName):
 
@@ -57,6 +71,38 @@ def writeData(allLine, fileName):
         for line in allLine:
             file.write(line)
     pass
+
+
+def createDataset(allVi, allLo):
+    allViConcat = []
+    for dataVi in allVi:
+        allViConcat += dataVi
+
+    allLoConcat = []
+    for dataLo in allLo:
+        allLoConcat += dataLo
+
+    assert (len(allLoConcat) != 0) | (len(allViConcat) != 0)
+
+    if (len(allLoConcat) == 0):
+        return Dataset.from_dict({
+            'translation': Dataset.from_dict({
+                'vi': allViConcat,
+            })
+        })
+    elif (len(allViConcat) == 0):
+        return Dataset.from_dict({
+            'translation': Dataset.from_dict({
+                'lo': allLoConcat,
+            })
+        })
+    else:
+        return Dataset.from_dict({
+            'translation': Dataset.from_dict({
+                'lo': allLoConcat,
+                'vi': allViConcat,
+            })
+        })
 
 
 def fixHTMLSpecialCharacter(allLine, verbose = True):
@@ -463,6 +509,10 @@ def viAlphaNumericThresholding(allLine1, allLine2, threshold, VI_ALL = VI_ALL, v
 
 def loCharacterNumericThresholding():  # TODO
     pass
+
+
+def rmNewLineCharacter(allLine):
+    return list(map(str.strip, allLine))
 
 
 def countOccurrence(allLine, query, mode):
