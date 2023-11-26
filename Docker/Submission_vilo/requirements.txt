@@ -1,0 +1,4 @@
+OpenNMT-py==3.4
+sentencepiece
+sacrebleu
+flask
