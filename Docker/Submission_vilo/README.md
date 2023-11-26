@@ -1,4 +1,7 @@
 # Overview
+
+You will have to download the zipped image from this link: https://drive.google.com/drive/folders/1sutmuCkkW2ms6mq4w-K6D-06s89wJ_FP?usp=sharing 
+
 This file has been modified by team TeslaV100 
 
 There are three main files in this submission 
@@ -14,3 +17,5 @@ You can test out this sample on an UNIX system with `docker` and `curl` installe
 - Run the docker image with `bash deploy.sh`. This one needs sudo
 - Test the docker with the `test.vi` file using `bash test.sh localhost 7502 test.vi`. By default this command output the result to stdout, and you can redirect it to a file by appending `> file_of_your_choosing.txt`
 - You can test with any text file that you want by using `bash test.sh localhost 7502 <Your text file name>`
+
+
