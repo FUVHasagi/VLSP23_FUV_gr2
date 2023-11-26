@@ -1,0 +1,30 @@
+# Use the official OpenNMT image as the base image
+FROM python:3.11
+
+
+# FROM pytorch/pytorch:latest
+# RUN git clone https://github.com/OpenNMT/OpenNMT-py.git && cd OpenNMT-py && pip install -r requirements.txt && python setup.py install
+
+WORKDIR /app
+
+ADD main.py ./
+ADD run.sh  ./
+
+COPY requirements.txt .
+# Install OpenNMT 3.4 and additional dependencies
+RUN pip install -r requirements.txt 
+
+RUN git clone https://github.com/ymoslem/MT-Preparation.git
+# # Download the compute-bleu script
+RUN wget https://raw.githubusercontent.com/ymoslem/MT-Evaluation/main/BLEU/compute-bleu.py
+
+# # Copy the source code to the container
+COPY model.vilo_avg8085.pt source_19.model target_19.model split_val2023_10kto100k.lo ./
+
+# # Check the content of the directory during build
+RUN ls -l /app
+
+RUN chmod +x run.sh 
+
+CMD ["python", "./main.py"]
+# ENTRYPOINT [ "run.sh" ]
